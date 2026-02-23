@@ -16,3 +16,10 @@ function next() {
 }
 
 next();
+
+
+function name(a,b) {
+  console.log("Name")
+};
+
+name();
