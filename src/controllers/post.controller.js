@@ -2,6 +2,7 @@ const postModel = require("../models/post.model");
 const ImageKit = require("@imagekit/nodejs");
 const { toFile } = require("@imagekit/nodejs")
 const jwt = require("jsonwebtoken");
+const likeModel = require("../models/like.model")
 
 
 // using image kit file upload to imagekit website from the server (memoryStorage)
@@ -12,7 +13,6 @@ const imagekit = new ImageKit({
 
 async function createPostController(req, res) {
   // console.log(req.body, req.file);
-
 
   const file = await imagekit.files.upload({
     file: await toFile(Buffer.from(req.file.buffer), 'file'),
@@ -36,8 +36,6 @@ async function createPostController(req, res) {
 }
 
 async function getPostController(req, res) {
-
-
   const userId = req.user.id;
 
   const posts = await postModel.find({
@@ -52,8 +50,6 @@ async function getPostController(req, res) {
 
 
 async function getPostDetailsController(req, res) {
-
-
   const userId = req.user.id;
   const postId = req.params.postId;
 
@@ -66,8 +62,6 @@ async function getPostDetailsController(req, res) {
   }
   const isValidUser = post.user.toString() === userId;
   console.log(post.user);
-
-
 
   if (!isValidUser) {
     return res.status(403).json({
@@ -83,8 +77,45 @@ async function getPostDetailsController(req, res) {
 
 }
 
+
+async function likePostController(req, res) {
+  const username = req.user.username;
+  const postId = req.params.postId;
+
+  const post = await postModel.findById(postId);
+
+  if (!post) {
+    return res.status(404).json({
+      message: "Post not found"
+    })
+  }
+
+  const isAlreadyLike = await likeModel.findOne(
+    { user: username, post: postId }
+  )
+  if (isAlreadyLike) {
+    return res.status(200).json({
+      message: "You are already liked"
+    })
+  }
+
+  const like = await likeModel.create({
+    post: postId,
+    user: username
+  })
+
+  return res.status(200).json({
+    message: "Post liked successfully",
+    like
+  })
+
+
+
+}
+
 module.exports = {
   createPostController,
   getPostController,
-  getPostDetailsController
+  getPostDetailsController,
+  likePostController
 };
