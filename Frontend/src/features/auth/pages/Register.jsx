@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useState } from 'react'
+import { useAuth } from '../hooks/useAuth'
 
 const Register = () => {
     const [username, setUsername] = useState("");
