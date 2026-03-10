@@ -12,14 +12,14 @@ const imagekit = new ImageKit({
 });
 
 async function createPostController(req, res) {
-  // console.log(req.body, req.file);
+  console.log(req.body, req.file);
 
   const file = await imagekit.files.upload({
     file: await toFile(Buffer.from(req.file.buffer), 'file'),
     fileName: 'test',
     folder: "cohort-2-insta-clone"
   });
-  console.log(file);
+  // console.log(file);
 
   const post = await postModel.create({
     caption: req.body.caption,
@@ -31,10 +31,10 @@ async function createPostController(req, res) {
     message: "post created successfully",
     post
   })
-
-
 }
 
+
+// GET /api/posts [Protected]
 async function getPostController(req, res) {
   const userId = req.user.id;
 
@@ -48,20 +48,20 @@ async function getPostController(req, res) {
 
 }
 
-
+// GET /api/posts/details/:postid
 async function getPostDetailsController(req, res) {
   const userId = req.user.id;
   const postId = req.params.postId;
 
   const post = await postModel.findById(postId);
 
-  if (!post) {
+  if (!post) {   
     return res.status(404).json({
       message: "Post not found"
     })
   }
   const isValidUser = post.user.toString() === userId;
-  console.log(post.user);
+  // console.log(post.user);
 
   if (!isValidUser) {
     return res.status(403).json({

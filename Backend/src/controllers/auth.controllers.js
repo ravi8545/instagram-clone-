@@ -26,7 +26,7 @@ async function registerController(req, res) {
     username,
     email,
     bio,
-    profileImage,
+    profileImage, 
     password: hash,
   });
 
@@ -62,15 +62,16 @@ async function loginController(req, res) {
   const user = await userModel.findOne({
     $or: [{ username: username }, { email: email }],
   });
+  
   if (!user) {
-    return res.status(404).json({
+    return res.status(404).json({ 
       message: "User not found",
     });
   }
   const hash = await bcrypt.compare(password, user.password); //convert into hash and compare its value
 
   const isPasswordValid = hash;
-
+ 
   if (!isPasswordValid) {
     return res.status(401).json({
       message: "password invalid",
