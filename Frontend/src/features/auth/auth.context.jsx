@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { login, register } from "./services/auth.api";
+import { login, register, getMe } from "./services/auth.api";
 
 // 1️⃣ Create Context
 export const AuthContext = createContext();
@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
         setLoading(true);
         try {
             const response = await login(username, password);
-            setUser(response.username);
+            setUser(response.user);
         } catch (err) {
             console.log(err);
         } finally {

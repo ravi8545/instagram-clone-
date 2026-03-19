@@ -8,30 +8,32 @@ const api = axios.create({
 
 
 export async function register(username, email, password) {
-
     try {
         const response = await api.post("/register", {
             username,
             email,
             password
-        })
+        });
+        return response.data;
     } catch (err) {
-        throw err
+        throw err;
     }
 }
-
-
 
 export async function login(username, password) {
     try {
         const response = await api.post("/login", {
             username,
             password
-        })
+        });
+        return response.data;
     } catch (err) {
-        throw err
+        throw err;
     }
 }
+
+
+
 
 export async function getMe(){
     try{

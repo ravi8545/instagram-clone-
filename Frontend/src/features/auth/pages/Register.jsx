@@ -24,7 +24,6 @@ const Register = () => {
             })
     }
 
-
     return (
         <main>
             <div className="form-container">
