@@ -21,11 +21,9 @@ async function followUserController(req, res) {
 
     if (isAlreadyFollowing) {
         return res.status(200).json({
-            message: `You are already following ${followeeUsername}`,
-            follow: isAlreadyFollowing
+            message: `You are already following ${followeeUsername}`,     
         })
     }
-
     const isFolloweeExists = await userModel.findOne({
         username: followeeUsername
     })
@@ -69,9 +67,10 @@ async function unfollowUserController(req, res) {
     res.status(200).json({
         message: `You have unfollowed ${followeeUsername}}`
     })
-
-
 }
+
+
+
 
 
 module.exports = {

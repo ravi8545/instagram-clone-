@@ -10,11 +10,24 @@ const userRouter = express.Router();
 // @description follow a user
 //@access Private
 
+//api/users/
 userRouter.post("/follow/:username", identifyUser, userController.followUserController)
 userRouter.post("/unfollow/:username", identifyUser, userController.unfollowUserController)
 
 
+// // Accept request
+// userRouter.post(
+//     "/follow/accept/:username",
+//     identifyUser,
+//     userController.acceptFollowRequest
+// );
 
+// // Reject request
+// userRouter.post(
+//     "/follow/reject/:username",
+//     identifyUser,
+//     userController.rejectFollowRequest
+// );
 
 
 

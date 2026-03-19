@@ -78,6 +78,8 @@ async function getPostDetailsController(req, res) {
 }
 
 
+
+
 async function likePostController(req, res) {
   const username = req.user.username;
   const postId = req.params.postId;
@@ -108,9 +110,6 @@ async function likePostController(req, res) {
     message: "Post liked successfully",
     like
   })
-
-
-
 }
 
 module.exports = {

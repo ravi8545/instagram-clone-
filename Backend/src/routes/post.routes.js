@@ -25,7 +25,7 @@ postRouter.get("/", identifyUser, postController.getPostController);
 GET /api/posts/details/:postid
 returns a deatil about specific post with the id also check whether the post 
 belongs to the user that request come from */
-postRouter.get("/details/:postId", postController.getPostDetailsController);
+postRouter.get("/details/:postId",identifyUser, postController.getPostDetailsController);
 
 
 /*
