@@ -32,7 +32,16 @@ postRouter.get("/details/:postId",identifyUser, postController.getPostDetailsCon
 @route  Post /api/posts/like/:getPostDetailsController
 @description like a post with the id provided in thr request params
 */
-postRouter.post("/like/:postId", identifyUser, postController.likePostController)
+postRouter.post("/like/:postId", identifyUser, postController.likePostController);
+
+
+/*
+@route GET /api/posts/feed
+@description get all the post created in the DB
+@access private
+*/
+
+postRouter.get("/feed", identifyUser, postController.getFeedController);
 
 
 module.exports = postRouter;

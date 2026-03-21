@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router'
 const Login = () => {
 
     const {user, loading, handleLogin} = useAuth();
+    console.log(loading);
     
     const [username , setUsername] = useState("");
     const [password, setPassword] = useState("")
@@ -29,8 +30,6 @@ const Login = () => {
             </main>
         )
     }
-
-
 
   return (
     <main>
